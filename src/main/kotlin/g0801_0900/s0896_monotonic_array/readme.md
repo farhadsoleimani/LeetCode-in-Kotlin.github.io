@@ -39,24 +39,14 @@ Given an integer array `nums`, return `true` _if the given array is monotonic, o
 ```kotlin
 class Solution {
     fun isMonotonic(nums: IntArray): Boolean {
-        var i = 0
-        while (i < nums.size - 1) {
-            if (nums[i] > nums[i + 1]) {
-                break
-            }
-            i++
+        var inc = true
+        var dec = true
+        for (i in 1 until nums.size) {
+            if (nums[i] > nums[i - 1]) dec = false
+            if (nums[i] < nums[i - 1]) inc = false
+            if (!inc && !dec) return false  // early exit
         }
-        if (i == nums.size - 1) {
-            return true
-        }
-        i = 0
-        while (i < nums.size - 1) {
-            if (nums[i] < nums[i + 1]) {
-                break
-            }
-            i++
-        }
-        return i == nums.size - 1
+        return true
     }
 }
 ```
