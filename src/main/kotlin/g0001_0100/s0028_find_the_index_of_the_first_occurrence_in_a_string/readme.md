@@ -13,7 +13,7 @@ Given two strings `needle` and `haystack`, return the index of the first occurre
 
 **Output:** 0
 
-**Explanation:** "sad" occurs at index 0 and 6. The first occurrence is at index 0, so we return 0.
+**Explanation:** "sad" occurs at indices 0 and 6. The first occurrence is at index 0, so we return 0.
 
 **Example 2:**
 
@@ -32,16 +32,14 @@ Given two strings `needle` and `haystack`, return the index of the first occurre
 
 ```kotlin
 class Solution {
-    fun strStr(haystack: String, needle: String): Int {
-        if (needle.isEmpty()) {
-            return 0
-        }
-        val m = haystack.length
-        val n = needle.length
-        for (start in 0 until m - n + 1) {
-            if (haystack.substring(start, start + n) == needle) {
-                return start
-            }
+    fun strStr(h: String, p: String): Int {
+        val m = h.length; val n = p.length
+        if (n == 0) return 0
+        if (n > m) return -1
+        for (i in 0..m - n) {
+            var j = 0
+            while (j < n && h[i + j] == p[j]) j++
+            if (j == n) return i
         }
         return -1
     }
